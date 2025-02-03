@@ -33,8 +33,20 @@
         
     ?>
     <h2>Ejercicio 2</h2>
-    <?php
+    <p>Proporcionar los valores de $a, $b, $c como sigue:</p>
     
+    <?php 
+    $a = "ManejadorSQL";
+    $b = 'MySQL';
+    $c = &$a;
+    
+    echo "<p>El valor de \$a es: $a</p>";
+    echo "<p>El valor de \$b es: $b</p>";
+    echo "<p>El valor de \$c es: $c</p>";
+    $a = "PHP server";
+    $b = &$a;
+    echo "<p>El valor de \$a es: $a</p>";
+    echo "<p>El valor de \$b es: $b</p>";
     ?>
 </body>
 </html>
