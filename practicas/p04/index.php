@@ -99,5 +99,20 @@ echo "<p>= \$c es: $c</p>";
 unset($a, $b, $c);  
 
 ?>
+<h2>EJERCICIO 6</h2>
+<?php
+$a = "0";
+$b = "TRUE";
+$c = FALSE;
+$d = ($a OR $b);
+$e = ($a AND $c);
+$f = ($a XOR $b);
+
+
+echo "d: " . var_export($d, true) . "<br>";
+echo "e: " . var_export($e, true) . "<br>";
+echo "f: " . var_export($f, true) . "<br>";
+?>
+
 </body>
 </html>
