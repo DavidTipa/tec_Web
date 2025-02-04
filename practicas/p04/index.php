@@ -113,6 +113,16 @@ echo "d: " . var_export($d, true) . "<br>";
 echo "e: " . var_export($e, true) . "<br>";
 echo "f: " . var_export($f, true) . "<br>";
 ?>
+<h2>EJERCICIO 7</h2>
+<?php
+
+echo "Version de Apache: " . $_SERVER['SERVER_SOFTWARE'] . "<br>";
+echo "Versión de PHP: " . phpversion() . "<br>";
+echo "Sistema operativo del servidor: " . PHP_OS . "<br>";
+
+echo "Idioma del navegador: " . $_SERVER['HTTP_ACCEPT_LANGUAGE'] . "<br>";
+
+?>
 
 </body>
 </html>
