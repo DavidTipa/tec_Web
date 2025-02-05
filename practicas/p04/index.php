@@ -53,6 +53,16 @@
     <p>El valor de la nueva variable `$a` fue pasado a la variable `$b`. Se asignó por referencia, por ende, imprime el mismo valor.</p>
 
     <h2>Ejercicio 3</h2>
+    <p>Muestra el contenido de cada variable inmediatamente después de cada asignación,
+            verificar la evolución del tipo de estas variables (imprime todos los componentes de los
+        arreglo):
+        $a = “PHP5”;
+        $z[] = &$a;
+        $b = “5a version de PHP”;
+        $c = $b*10;
+        $a .= $b;
+        $b *= $c;
+        z$z[0] = “MySQL”;</p>
     <?php
     // 1. Asignación de $a
     $a = "PHP5 ";
@@ -75,6 +85,8 @@
     var_dump($z);
 
     echo "<h2> EJERCICIO 4</h2>";
+    echo "<h2> Lee y muestra los valores de las variables del ejercicio anterior, pero ahora con la ayuda de
+la matriz $GLOBALS o del modificador global de PHP.</h2>";
     echo "<p>\$a: " . $GLOBALS['a'] . "</p>";
 echo "<p>\$b: " . $GLOBALS['b'] . "</p>";
 echo "<p>\$c: " . $GLOBALS['c'] . "</p>";
@@ -87,6 +99,7 @@ echo "<p>\$z: " . $GLOBALS['z'][0] . "</p>";
  
 ?>
 <h2>EJERCICIO 5</h2>
+<p>Dar el valor de las variables $a, $b, $c al final del siguiente script:</p>
 <?php
 $a = "7 personas";
 $b = (integer) $a;
@@ -100,6 +113,17 @@ unset($a, $b, $c);
 
 ?>
 <h2>EJERCICIO 6</h2>
+<p>Dar y comprobar el valor booleano de las variables $a, $b, $c, $d, $e y $f y muéstralas <br>
+usando la función var_dump("datos").<br>
+Después investiga una función de PHP que permita transformar el valor booleano de $c y $e<br>
+en uno que se pueda mostrar con un echo: <br>
+$a = “0”; <br>
+$b = “TRUE”;<br>
+$c = FALSE;<br>
+$d = ($a OR $b);<br>
+$e = ($a AND $c);<br>
+$f = ($a XOR $b);</p>
+
 <?php
 $a = "0";
 $b = "TRUE";
@@ -108,17 +132,39 @@ $d = ($a OR $b);
 $e = ($a AND $c);
 $f = ($a XOR $b);
 
+echo '<ul>';
+echo '<li>$a = ' . var_dump($a) . '</li>';
+echo '<li>$b = ' . var_dump($b) . '</li>';
+echo '<li>$c = ' . var_dump($c) . '</li>';
+echo '<li>$d = ' . var_dump($d) . '</li>';
+echo '<li>$e = ' . var_dump($e) . '</li>';
+echo '<li>$f = ' . var_dump($f) . '</li>';
+echo '</ul>';
 
-echo "d: " . var_export($d, true) . "<br>";
+echo '<h4>Transformar el valor booleano de $c y $e en uno que se pueda mostrar con un echo:</h4>';
+echo "c: " . var_export($c, true) . "<br>";
 echo "e: " . var_export($e, true) . "<br>";
 echo "f: " . var_export($f, true) . "<br>";
+
+unset($a);
+unset($b);
+unset($c);
+unset($d);
+unset($e);
+unset($f);
 ?>
 <h2>EJERCICIO 7</h2>
+<p> 
+Usando la variable predefinida $_SERVER, determina lo siguiente:<br>
+a. La versión de Apache y PHP,<br>
+b. El nombre del sistema operativo (servidor),<br>
+c. El idioma del navegador (cliente).<br>
+
 <?php
 
 echo "Version de Apache: " . $_SERVER['SERVER_SOFTWARE'] . "<br>";
 echo "Versión de PHP: " . phpversion() . "<br>";
-echo "Sistema operativo del servidor: " . PHP_OS . "<br>";
+echo "nombre del sistema operativo: " . PHP_OS . "<br>";
 
 echo "Idioma del navegador: " . $_SERVER['HTTP_ACCEPT_LANGUAGE'] . "<br>";
 
