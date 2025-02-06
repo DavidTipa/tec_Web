@@ -38,6 +38,24 @@
        echo "<h3>Por favor, proporciona un número en la URL usando el parámetro 'numerito'.</h3>";
    }
    ?>
+   <h2>Ejercicio 4</h2>
+   <table>
+    <tr>
+        <th>Índice (ASCII)</th>
+        <th>Letra</th>
+    </tr>
+
+    <?php
+    require_once('src/funciones.php');
+  
+    foreach ($arreglo as $key => $value) {
+        echo "<tr>";
+        echo "<td>$key</td>";
+        echo "<td>$value</td>";
+        echo "</tr>";
+    }
+    ?>
+   </table>
 
     <h2>Ejemplo de POST</h2>
     <form action="http://localhost/tecweb/practicas/p04/index.php" method="post">
@@ -54,5 +72,6 @@
             echo $_POST["email"];
         }
     ?>
+    
 </body>
 </html>
