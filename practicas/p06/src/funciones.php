@@ -37,12 +37,7 @@ function numerosAleatorios()
         $matriz[] = [$num1, $num2, $num3]; 
 
     } while (!(($num1 % 2 != 0) && esPar($num2) && ($num3 % 2 != 0)));
-
-  
-   
-
-
-    echo "<br><h3>Iteraciones: $iteraciones</h3>";
+ echo "<br><h3>Iteraciones: $iteraciones</h3>";
     echo "<h3>Total de números generados: $totalNumeros</h3>";
 }
 
@@ -57,10 +52,10 @@ function numeroPar($numerito) {
         $num = rand(1, 100); 
 
         if (($num % 2 == 0) && ($num % $numerito == 0)) { 
-            return "<h3>El número $numerito es par y múltiplo de $num</h3>";
+            return "<h3>El número $numerito es par y múltiplo del numero generado aleatoriamente $num</h3>";
         }
         else {
-            return "<h3>El número $numerito NO es par o múltiplo de $num</h3>";
+            return "<h3>El número $numerito NO es par o múltiplo del numero generado aleatoriamente $num</h3>";
         }
 
     } while (true); 
