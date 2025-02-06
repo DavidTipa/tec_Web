@@ -67,6 +67,13 @@ function numeroPar($numerito) {
 
 }
 ?>
+<?php
+$arreglo=array();
+for($i=97;$i<=122;$i++)
+{
+    $arreglo[$i]=chr($i);
+}
+?>
 
 
 
