@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Acceso</title>
+</head>
+<body>
+    <h2>Ingrese sus datos</h2>
+    <form action="src/xhtml.php" method="post">
+        <label for="edad">Edad:</label>
+        <input type="number" name="edad" id="edad" required><br><br>
+
+        <label>Sexo:</label>
+        <input type="radio" name="sexo" value="femenino" required> Femenino
+        <input type="radio" name="sexo" value="masculino" required> Masculino <br><br>
+
+        <input type="submit" value="Enviar">
+    </form>
+</body>
+</html>

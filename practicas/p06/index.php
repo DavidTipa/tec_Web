@@ -39,6 +39,18 @@
    }
    ?>
    <h2>Ejercicio 4</h2>
+   <p>Crear un arreglo cuyos índices van de 97 a 122 y cuyos valores son las letras de la ‘a’
+a la ‘z’. Usa la función chr(n) que devuelve el caracter cuyo código ASCII es n para poner
+el valor en cada índice. Es decir:<br>
+[97] => a<br>
+[98] => b<br>
+[99] => c<br>   
+[98] => b<br>
+[99] => c<br>
+...
+[122] => z
+✓ Crea el arreglo con un ciclo for
+✓ Lee el arreglo y crea una tabla en XHTML con echo y un ciclo foreach</p>
    <table>
     <tr>
         <th>Índice (ASCII)</th>
@@ -50,7 +62,7 @@
   
     foreach ($arreglo as $key => $value) {
         echo "<tr>";
-        echo "<td>$key</td>";
+        echo "<td>$key </td>";
         echo "<td>$value</td>";
         echo "</tr>";
     }
@@ -58,7 +70,7 @@
    </table>
 
     <h2>Ejemplo de POST</h2>
-    <form action="http://localhost/tecweb/practicas/p04/index.php" method="post">
+    <form action="http://localhost/tec_Web/practicas/p06/index.php" method="post">
         Name: <input type="text" name="name"><br>
         E-mail: <input type="text" name="email"><br>
         <input type="submit">
@@ -72,6 +84,17 @@
             echo $_POST["email"];
         }
     ?>
-    
+    <h2>Ingrese sus datos</h2>
+    <form action="src/xhtml.php" method="post">
+        <label for="edad">Edad:</label>
+        <input type="number" name="edad" id="edad" required><br><br>
+
+        <label>Sexo:</label>
+        <input type="radio" name="sexo" value="femenino" required> Femenino
+        <input type="radio" name="sexo" value="masculino" required> Masculino <br><br>
+
+        <input type="submit" value="Enviar">
+    </form>
+
 </body>
 </html>
