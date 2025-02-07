@@ -84,6 +84,7 @@ el valor en cada índice. Es decir:<br>
             echo $_POST["email"];
         }
     ?>
+    <h2>EJERCICIO 5</h2>
     <h2>Ingrese sus datos</h2>
     <form action="src/xhtml.php" method="post">
         <label for="edad">Edad:</label>
@@ -95,6 +96,48 @@ el valor en cada índice. Es decir:<br>
 
         <input type="submit" value="Enviar">
     </form>
+
+    <h2>EJERCICIO 6</h2>
+    <h2>Consultar Información de Autos</h2>
+<form method="post">
+    <label for="matricula">Buscar por matrícula:</label>
+    <input type="text" name="matricula" id="matricula">
+    <button type="submit">Buscar</button>
+    <br><br>
+    <button type="submit" name="mostrar_todos">Mostrar Todos los Autos</button>
+</form>
+
+<hr>
+
+<?php
+require_once 'src/funciones.php';
+
+$resultado = null;
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if (isset($_POST['matricula']) && !empty($_POST['matricula'])) {
+        $matricula = $_POST['matricula'];
+        $resultado = buscarPorMatricula($matricula);
+    }
+}
+?>
+
+<?php if ($resultado): ?>
+    <h3>Información del Auto</h3>
+    <?php print_r($resultado); ?>
+<?php elseif (isset($_POST['mostrar_todos'])): ?>
+    <h3>Lista de Autos Registrados</h3>
+    
+    <?php
+    $todosLosAutos = obtenerTodosLosAutos();
+    print_r($todosLosAutos);
+    ?>
+
+<?php elseif ($_SERVER["REQUEST_METHOD"] == "POST"): ?>
+    <p>No se encontraron resultados.</p>
+<?php endif; ?>
+ 
+
+
 
 </body>
 </html>
