@@ -1,0 +1,40 @@
+<!DOCTYPE html >
+<html>
+
+  <head>
+    <meta charset="utf-8" >
+    <title>Registro de productos</title>
+    <style type="text/css">
+      ol, ul { 
+      list-style-type: none;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>Registro de productos marketzone</h1>
+
+    
+
+    <form id="formularioTenis" action="http://localhost/tec_Web/practicas/p08/set_productov2.php" method="post">
+
+    <h2>requerimientos necesarios para la implementacion de nuevos productos</h2>
+
+      <fieldset>
+        <legend>Información Personal</legend>
+
+        <ul>
+          <li><label for="form-name">Nombre:</label> <input type="text" name="name" id="form-name"></li>
+          <li><label for="form-marca">Marca:</label> <input type="text" name="Marca" id="form-marca"></li>
+          <li><label for="form-modelo">Modelo:</label> <input type="text" name="Modelo" id="form-modelo"></li>
+          <li><label for="form-precio">Precio:</label> <input type="text" name="precio" id="form-precio"></li>
+        <li><label for="form-details">Detalles del producto</label><br><textarea name="detalles" rows="4" cols="60" id="form-details" placeholder="No más de 300 caracteres de longitud"></textarea></li>
+        <li> <label for="form-unidades">Numero de unidades</label><input type="text" name="unidades" id="form-unidades"></li>
+         
+        </ul>
+      </fieldset>
+
+
+    </form>
+  </body>
+</html>
