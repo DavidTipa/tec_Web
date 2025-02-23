@@ -1,0 +1,56 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Práctica 4</title>
+</head>
+<body>
+
+    <h2>Ejercicio 1</h2>
+    <p>Determina cuál de las siguientes variables son válidas y explica por qué:</p>
+    <p>$_myvar, $_7var, myvar, $myvar, $var7, $_element1, $house*5</p>
+    <h4>Respuesta:</h4><ul><li>$_myvar es válida porque inicia con guión bajo.</li><li>$_7var es válida porque inicia con guión bajo.</li><li>myvar es inválida porque no tiene el signo de dólar ($).</li><li>$myvar es válida porque inicia con una letra.</li><li>$var7 es válida porque inicia con una letra.</li><li>$_element1 es válida porque inicia con guión bajo.</li><li>$house*5 es inválida porque el símbolo * no está permitido.</li></ul>
+    <h2>Ejercicio 2</h2>
+    <p>Proporcionar los valores de $a, $b, $c como sigue:</p>
+    <p>El valor de $a es: ManejadorSQL</p><p>El valor de $b es: MySQL</p><p>El valor de $c es: ManejadorSQL</p><p>El valor de $a es: PHP server</p><p>El valor de $b es: PHP server</p>    <p>El valor de la nueva variable `$a` fue pasado a la variable `$b`. Se asignó por referencia, por ende, imprime el mismo valor.</p>
+
+    <h2>Ejercicio 3</h2>
+    <p>Muestra el contenido de cada variable inmediatamente después de cada asignación:</p>
+    <p>1. Después de asignar $a: PHP5 </p><p>2. Después de asignar $z:</p><div><pre>Array
+(
+    [0] =&gt; PHP5 
+)
+</pre></div><p>3. Después de asignar $b: 5a version de PHP</p><p>4. Después de multiplicar b * 10, $c: 50</p><p>5. Después de concatenar a con b, $a: PHP5 5a version de PHP</p><p>6. Después de multiplicar $b y $c: 250</p><p>7. Después de modificar $z[0]:</p><div><pre>Array
+(
+    [0] =&gt; MySQL
+)
+</pre></div>
+    <h2>EJERCICIO 4</h2>
+    <p>Lee y muestra los valores de las variables del ejercicio anterior, pero ahora con la ayuda de la matriz $GLOBALS o del modificador global de PHP.</p>
+    <p>$a: MySQL</p><p>$b: 250</p><p>$c: 50</p><p>$z:</p><div><pre>Array
+(
+    [0] =&gt; MySQL
+)
+</pre></div>
+    <h2>EJERCICIO 5</h2>
+    <p>Dar el valor de las variables $a, $b, $c al final del siguiente script:</p>
+    <p>= $a es: 9E3</p><p>= $b es: 7</p><p>= $c es: 9000</p>
+    <h2>EJERCICIO 6</h2>
+    <p>Dar y comprobar el valor booleano de las variables $a, $b, $c, $d, $e y $f y muéstralas:</p>
+    <ul><li>$a = &#039;0&#039;</li><li>$b = &#039;TRUE&#039;</li><li>$c = false</li><li>$d = true</li><li>$e = false</li><li>$f = true</li></ul><h4>Transformar el valor booleano de $c y $e en uno que se pueda mostrar con un echo:</h4><p>c: false</p><p>e: false</p><p>f: true</p>
+    <h2>EJERCICIO 7</h2>
+    <p>Usando la variable predefinida $_SERVER, determina lo siguiente:</p>
+    <ul>
+        <li>a. La versión de Apache y PHP: Apache/2.4.58 (Win64) OpenSSL/3.1.3 PHP/8.2.12</li>
+        <li>b. El nombre del sistema operativo (servidor): WINNT</li>
+        <li>c. El idioma del navegador (cliente): en-US,en;q=0.9</li>
+    </ul>
+    <div>
+    <p>
+    <a href="https://validator.w3.org/markup/check?uri=referer"><img
+      src="https://www.w3.org/Icons/valid-xhtml11" alt="Valid XHTML 1.1" height="31" width="88" /></a>
+  </p>
+    </div>
+</body>
+</html>

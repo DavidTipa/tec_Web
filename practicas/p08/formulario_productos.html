@@ -1,40 +1,31 @@
-<!DOCTYPE html >
+<!DOCTYPE html>
 <html>
-
-  <head>
-    <meta charset="utf-8" >
+<head>
+    <meta charset="utf-8">
     <title>Registro de productos</title>
     <style type="text/css">
       ol, ul { 
       list-style-type: none;
       }
     </style>
-  </head>
-
-  <body>
+</head>
+<body>
     <h1>Registro de productos marketzone</h1>
-
-    
-
-    <form id="formularioTenis" action="http://localhost/tec_Web/practicas/p08/set_productov2.php" method="post">
-
-    <h2>requerimientos necesarios para la implementacion de nuevos productos</h2>
-
-      <fieldset>
-        <legend>Información Personal</legend>
-
-        <ul>
-          <li><label for="form-name">Nombre:</label> <input type="text" name="name" id="form-name"></li>
-          <li><label for="form-marca">Marca:</label> <input type="text" name="Marca" id="form-marca"></li>
-          <li><label for="form-modelo">Modelo:</label> <input type="text" name="Modelo" id="form-modelo"></li>
-          <li><label for="form-precio">Precio:</label> <input type="text" name="precio" id="form-precio"></li>
-        <li><label for="form-details">Detalles del producto</label><br><textarea name="detalles" rows="4" cols="60" id="form-details" placeholder="No más de 300 caracteres de longitud"></textarea></li>
-        <li> <label for="form-unidades">Numero de unidades</label><input type="text" name="unidades" id="form-unidades"></li>
-         
-        </ul>
-      </fieldset>
-
-
+    <form id="formularioMarketzone" action="http://localhost/tec_Web/practicas/p08/set_productov2.php" method="post" enctype="multipart/form-data">
+        <h2>Requerimientos necesarios para la implementación de nuevos productos</h2>
+        <fieldset>
+            <legend>Información Personal</legend>
+            <ul>
+                <li><label for="form-name">Nombre:</label> <input type="text" name="nombre" id="form-name" required></li>
+                <li><label for="form-marca">Marca:</label> <input type="text" name="marca" id="form-marca" required></li>
+                <li><label for="form-modelo">Modelo:</label> <input type="text" name="modelo" id="form-modelo" required></li>
+                <li><label for="form-precio">Precio:</label> <input type="text" name="precio" id="form-precio" required></li>
+                <li><label for="form-details">Detalles del producto</label><br><textarea name="detalles" rows="4" cols="60" id="form-details" placeholder="No más de 300 caracteres de longitud" required></textarea></li>
+                <li><label for="form-unidades">Número de unidades</label><input type="text" name="unidades" id="form-unidades" required></li>
+                <li><label for="form-image">Imagen del Producto:</label><input type="file" name="imagen" id="form-image" accept="image/*"></li>
+                <li><input type="submit" value="Registrar Producto"></li>
+            </ul>
+        </fieldset>
     </form>
-  </body>
+</body>
 </html>
