@@ -64,7 +64,7 @@
         if ($stmt->execute()) {
             echo "<h1>¡Producto actualizado correctamente!</h1>";
 			echo "<h1><a href= get_productos_vigentes_v2.php>vuelva a los productos vigentes aqui</a></h1>";
-			echo "<h1><a href= get_products_xhtml_v2.php>vuelva a ver todos los productos aqui</a></h1>";
+			echo "<h1><a href= get_productos_xhtml_v2.php>vuelva a ver todos los productos aqui</a></h1>";
         } else {
             echo "<h1>Error al actualizar el producto.</h1>";
         }
