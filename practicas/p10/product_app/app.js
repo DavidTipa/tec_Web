@@ -94,27 +94,68 @@ function buscarProducto(e) {
     client.send("busqueda=" + encodeURIComponent(busqueda));
 }
 
-// FUNCIÓN CALLBACK DE BOTÓN "Agregar Producto"
 function agregarProducto(e) {
     e.preventDefault();
 
-    // SE OBTIENE DESDE EL FORMULARIO EL JSON A ENVIAR
-    var productoJsonString = document.getElementById('description').value;
-    // SE CONVIERTE EL JSON DE STRING A OBJETO
-    var finalJSON = JSON.parse(productoJsonString);
-    // SE AGREGA AL JSON EL NOMBRE DEL PRODUCTO
-    finalJSON['nombre'] = document.getElementById('name').value;
-    // SE OBTIENE EL STRING DEL JSON FINAL
-    productoJsonString = JSON.stringify(finalJSON,null,2);
+    var nombreProducto = document.getElementById('name').value.trim();
+    var productoJsonString = document.getElementById('description').value.trim();
+    let finalJSON;
 
-    // SE CREA EL OBJETO DE CONEXIÓN ASÍNCRONA AL SERVIDOR
+    try {
+        finalJSON = JSON.parse(productoJsonString);
+    } catch (error) {
+        window.alert("El JSON no tiene un formato válido. Por favor, verifica que el JSON esté bien formado.");
+        return;
+    }
+
+    // VALIDACIONES
+    if (!nombreProducto || nombreProducto.length > 100) {
+        window.alert("El nombre del producto no puede estar vacío y debe tener máximo 100 caracteres.");
+        return;
+    }
+
+    if (typeof finalJSON.precio !== 'number' || finalJSON.precio < 100 || finalJSON.precio > 1000000) {
+        window.alert('El precio debe ser un numero valido, mayor o igual a 100 y menor o igual a 1,000,000.');
+        return;
+    }
+
+    if (typeof finalJSON.unidades !== 'number' || finalJSON.unidades < 0 || finalJSON.unidades > 10000) {
+        window.alert('Las unidades deben ser un número válido, mayor o igual a 0 y menor o igual a 10,000.');
+        return;
+    }
+
+    if (!finalJSON.modelo || !/^[A-Za-z0-9 ]+$/.test(finalJSON.modelo) || finalJSON.modelo.length > 50) {
+        window.alert('El modelo solo puede contener caracteres alfanuméricos y debe tener máximo 50 caracteres.');
+        return;
+    }
+
+    if (!finalJSON.marca || finalJSON.marca.trim() === '' || finalJSON.marca.length > 50) {
+        window.alert('La marca no puede estar vacía y debe tener máximo 50 caracteres.');
+        return;
+    }
+
+    if (!finalJSON.detalles || finalJSON.detalles.length > 250) {
+        window.alert('Los detalles no pueden estar vacíos y deben tener máximo 250 caracteres.');
+        return;
+    }
+
+    if (!finalJSON.imagen || !/^https?:\/\/.+\.(jpg|jpeg|png|gif)$/i.test(finalJSON.imagen)) {
+        window.alert('La imagen debe ser una URL válida y debe terminar en .jpg, .jpeg, .png o .gif.');
+        return;
+    }
+
+    // Agregar el nombre al JSON y convertirlo en string
+    finalJSON['nombre'] = nombreProducto;
+    productoJsonString = JSON.stringify(finalJSON, null, 2);
+
+    // Enviar al backend
     var client = getXMLHttpRequest();
     client.open('POST', './backend/create.php', true);
     client.setRequestHeader('Content-Type', "application/json;charset=UTF-8");
     client.onreadystatechange = function () {
-        // SE VERIFICA SI LA RESPUESTA ESTÁ LISTA Y FUE SATISFACTORIA
         if (client.readyState == 4 && client.status == 200) {
             console.log(client.responseText);
+            alert("Producto agregado con éxito.");
         }
     };
     client.send(productoJsonString);
@@ -154,3 +195,16 @@ function init() {
     var JsonString = JSON.stringify(baseJSON,null,2);
     document.getElementById("description").value = JsonString;
 }
+client.onreadystatechange = function () {
+    if (client.readyState == 4 && client.status == 200) {
+        // Parsear la respuesta del servidor
+        let response = JSON.parse(client.responseText);
+
+        // Mostrar el mensaje en un alert
+        if (response.status === 'success') {
+            alert(response.message); // Mensaje de éxito
+        } else {
+            alert(response.message); // Mensaje de error
+        }
+    }
+};
