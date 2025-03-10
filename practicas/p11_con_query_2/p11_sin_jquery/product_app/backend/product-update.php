@@ -1,13 +1,13 @@
 <?php
-header('Content-Type: application/json'); // Asegúrate de que la respuesta sea JSON
+header('Content-Type: application/json'); 
 
-// Incluir el archivo de conexión a la base de datos
+
 include('database.php');
 
-// Leer los datos enviados por AJAX
+
 $data = json_decode(file_get_contents("php://input"), true);
 
-// Validar que el ID del producto esté presente
+
 if (!isset($data['id']) || empty($data['id'])) {
     echo json_encode(["status" => "error", "message" => "ID de producto no proporcionado"]);
     exit;
@@ -15,7 +15,7 @@ if (!isset($data['id']) || empty($data['id'])) {
 
 $id = intval($data['id']); // Convertir el ID a entero
 
-// Validar los demás campos
+
 $nombre = isset($data['nombre']) ? trim($data['nombre']) : '';
 $precio = isset($data['precio']) ? floatval($data['precio']) : 0;
 $unidades = isset($data['unidades']) ? intval($data['unidades']) : 1;
@@ -24,7 +24,7 @@ $marca = isset($data['marca']) ? trim($data['marca']) : 'NA';
 $detalles = isset($data['detalles']) ? trim($data['detalles']) : 'NA';
 $imagen = isset($data['imagen']) ? trim($data['imagen']) : 'img/default.png';
 
-// Validar que el producto exista en la base de datos
+
 $sql_check = "SELECT id FROM productos WHERE id = ?";
 $stmt_check = $conexion->prepare($sql_check);
 

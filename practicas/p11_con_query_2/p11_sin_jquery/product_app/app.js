@@ -21,16 +21,16 @@ function init() {
   fetchProducts();
 }
 
-// Función para cargar todos los productos no eliminados
+
 function fetchProducts() {
   $.ajax({
-    url: 'backend/product-list.php', // Endpoint que devuelve todos los productos no eliminados
+    url: 'backend/product-list.php',
     type: 'GET',
     success: function (response) {
       let products = JSON.parse(response);
       let template = '';
       if (products.length > 0) {
-        // Construir la tabla con todos los productos no eliminados
+       
         products.forEach(product => {
           let descripcion = '';
           descripcion += '<li>precio: ' + product.precio + '</li>';
@@ -57,7 +57,7 @@ function fetchProducts() {
           </tr>
         `;
       }
-      // Actualizar la tabla con todos los productos no eliminados
+      
       $('#products').html(template);
     },
     error: function (xhr, status, error) {
@@ -76,10 +76,10 @@ $(document).on('click', '.task-item', function (event) {
 
     // Verifica si la respuesta es un objeto JSON válido
     if (typeof response === 'object' && response !== null) {
-      // Cargar los datos del producto en el formulario
+ 
       $('#name').val(response.nombre); // Nombre
       $('#productId').val(response.id); // ID (campo oculto)
-      $('#description').val(JSON.stringify(response, null, 2)); // Resto de los datos en formato JSON
+      $('#description').val(JSON.stringify(response, null, 2)); 
       edit = true; // Establecer la variable `edit` en true
     } else {
       console.error('La respuesta del servidor no es un objeto JSON válido:', response);
@@ -93,21 +93,21 @@ $(document).on('click', '.task-item', function (event) {
 // Función para eliminar un producto
 function eliminarProducto(event) {
   if (confirm("¿De verdad deseas eliminar el producto?")) {
-    // Obtener el ID del producto desde el atributo data-id del botón
+    
     var id = $(event.target).data('id');
 
-    // Realizar la solicitud AJAX para eliminar el producto
+  
     $.ajax({
       url: 'backend/product-delete.php',
       type: 'GET',
-      data: { id: id }, // Enviar el ID del producto
+      data: { id: id }, 
       success: function (response) {
         console.log(response);
 
-        // Parsear la respuesta JSON
+      
         let respuesta = JSON.parse(response);
 
-        // Mostrar el estado de la operación en la barra de estado
+     
         let template_bar = `
           <li style="list-style: none;">status: ${respuesta.status}</li>
           <li style="list-style: none;">message: ${respuesta.message}</li>
@@ -117,7 +117,7 @@ function eliminarProducto(event) {
         $('#product-result').removeClass('d-none').addClass('d-block');
         $('#container').html(template_bar);
 
-        // Actualizar la lista de productos
+        
         fetchProducts();
       },
       error: function (xhr, status, error) {
@@ -127,24 +127,24 @@ function eliminarProducto(event) {
   }
 }
 
-// Evento cuando el documento está listo
+
 $(document).ready(function () {
   init(); // Inicializa la página
 
-  // Evento keyup para el campo de búsqueda
+ 
   $('#search').keyup(function (e) {
-    let search = $('#search').val().trim(); // Obtener el valor del campo de búsqueda
+    let search = $('#search').val().trim(); 
 
     if (search) {
-      // Realizar la búsqueda
+      
       $.ajax({
         url: 'backend/product-search.php',
         type: 'GET',
-        data: { search: search }, // Enviar el término de búsqueda al backend
+        data: { search: search },
         success: function (response) {
           let products = JSON.parse(response);
           let template = '';
-          let productNames = ''; // Variable para almacenar los nombres de los productos
+          let productNames = ''; 
 
           if (products.length > 0) {
             // Construir la tabla con los productos encontrados
@@ -166,7 +166,7 @@ $(document).ready(function () {
                 </tr>
               `;
 
-              // Agregar el nombre del producto a la lista de nombres
+            
               productNames += `<li>${product.nombre}</li>`;
             });
           } else {
@@ -224,7 +224,7 @@ $('#product-form').submit(function(e) {
   }
   finalDescription.nombre = inputName;
 
-  // Validaciones adicionales (marca, modelo, precio, detalles, unidades)
+  
   if (!finalDescription.marca || finalDescription.marca.trim() === "") {
     window.alert('La marca es obligatoria');
     return;
@@ -262,18 +262,18 @@ $('#product-form').submit(function(e) {
     type: type,
     data: JSON.stringify(finalDescription),
     contentType: 'application/json; charset=utf-8',
-    dataType: 'json', // Asegúrate de que jQuery parsee la respuesta como JSON
+    dataType: 'json', 
     success: function(response) {
       console.log("Respuesta del servidor:", response);
 
-      // Verifica si la respuesta es un objeto JSON válido
+     
       if (typeof response === 'object' && response !== null) {
         if (response.status === 'success') {
           window.alert('Producto actualizado correctamente');
           $('#product-form').trigger('reset');
-          $('#productId').val(''); // Limpiar el ID del producto
+          $('#productId').val(''); 
           $('#product-form button[type="submit"]').text('Agregar Producto'); // Restaurar el texto del botón
-          fetchProducts(); // Actualizar la lista de productos
+          fetchProducts(); 
           edit = false; // Restablecer la variable `edit`
         } else {
           alert(response.message || 'Error al procesar el producto');

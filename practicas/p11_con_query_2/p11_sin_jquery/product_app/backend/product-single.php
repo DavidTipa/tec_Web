@@ -11,7 +11,7 @@
          die('Query Failed: ' . mysqli_error($conexion));
      }
  
-     // Se asume que el id es único y se devuelve el primer (y único) registro
+   //id unico
      if ($row = mysqli_fetch_assoc($result)) {
          $json = array(
              'id'       => $row['id'],
