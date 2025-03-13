@@ -125,6 +125,7 @@ $(document).ready(function(){
             $('#product-result').hide();
             
             
+            
                 
             
         }
