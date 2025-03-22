@@ -1,25 +1,25 @@
 <?php
-    include_once __DIR__.'/database.php';
 
-    // SE CREA EL ARREGLO QUE SE VA A DEVOLVER EN FORMA DE JSON
-    $data = array(
-        'status'  => 'error',
-        'message' => 'La consulta falló'
-    );
-    // SE VERIFICA HABER RECIBIDO EL ID
-    if( isset($_POST['id']) ) {
-        $id = $_POST['id'];
-        // SE REALIZA LA QUERY DE BÚSQUEDA Y AL MISMO TIEMPO SE VALIDA SI HUBO RESULTADOS
-        $sql = "UPDATE productos SET eliminado=1 WHERE id = {$id}";
-        if ( $conexion->query($sql) ) {
-            $data['status'] =  "success";
-            $data['message'] =  "Producto eliminado";
-		} else {
-            $data['message'] = "ERROR: No se ejecuto $sql. " . mysqli_error($conexion);
-        }
-		$conexion->close();
-    } 
+    use tec_Web\myapi\products as products;
+    require_once __DIR__.'/myapi/products.php';
     
-    // SE HACE LA CONVERSIÓN DE ARRAY A JSON
-    echo json_encode($data, JSON_PRETTY_PRINT);
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        // Obtener los datos del POST
+        $jsonOBJ = json_decode(json_encode($_POST));
+    
+       
+        $proObj = new products('marketzone');
+    
+       
+        $response = $proObj->delete($jsonOBJ->id);
+    
+         
+        echo $response;
+    } else {
+        
+        echo json_encode(array(
+            'status' => 'error',
+            'message' => 'Solicitud no válida'
+        ), JSON_PRETTY_PRINT);
+    }
 ?>

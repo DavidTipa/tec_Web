@@ -36,11 +36,63 @@ $this->conexion->close();
 
 
 }
+public function add($jsonOBJ){
+$this->data = array(
+    'status' => 'error',
+    'message' => 'Ya existe un producto con ese nombre'
+);
+$sql = "SELECT * FROM productos WHERE nombre = '{$jsonOBJ->nombre}' AND eliminado = 0";
+$result = $this->conexion->query($sql);
+if ($result->num_rows == 0) {
+    $this->conexion->set_charset("utf8");
+    $sql = "INSERT INTO productos VALUES (null, '{$jsonOBJ->nombre}', '{$jsonOBJ->marca}', '{$jsonOBJ->modelo}', {$jsonOBJ->precio}, '{$jsonOBJ->detalles}', {$jsonOBJ->unidades}, '{$jsonOBJ->imagen}', 0)";
+    if($this->conexion->query($sql)){
+        $this->data['status'] =  "success";
+        $this->data['message'] =  "Producto agregado";
+    } else {
+        $this->data['message'] = "ERROR: No se ejecuto $sql. " . mysqli_error($this->conexion);
+    }
+
+}
+$result->free();
+$this->conexion->close();
+return json_encode($this->data, JSON_PRETTY_PRINT);
+}
 public function getData(){
     return json_encode($this->data, JSON_PRETTY_PRINT);
 
 }
 
+public function delete($id){
+    $this->data = array(
+        'status' => 'error',
+        'message' => 'La consulta falló'
+    );
+    $sql = "UPDATE productos SET eliminado=1 WHERE id = {$id}";
+    if ( $this->conexion->query($sql) ) {
+        $this->data['status'] =  "success";
+        $this->data['message'] =  "Producto eliminado";
+    } else {
+        $this->data['message'] = "ERROR: No se ejecuto $sql. " . mysqli_error($this->conexion);
+    }
+    $this->conexion->close();
+    return json_encode($this->data, JSON_PRETTY_PRINT);
+}
+public function update($jsonOBJ){
+    $this->data = array(
+        'status' => 'error',
+        'message' => 'No se pudo actualizar el producto'
+    );
+    $sql = "UPDATE productos SET nombre='{$jsonOBJ->nombre}', marca='{$jsonOBJ->marca}', modelo='{$jsonOBJ->modelo}', precio={$jsonOBJ->precio}, detalles='{$jsonOBJ->detalles}', unidades={$jsonOBJ->unidades}, imagen='{$jsonOBJ->imagen}' WHERE id = {$jsonOBJ->id}";
+    if ( $this->conexion->query($sql) ) {
+        $this->data['status'] =  "success";
+        $this->data['message'] =  "Producto actualizado";
+    } else {
+        $this->data['message'] = "ERROR: No se ejecuto $sql. " . mysqli_error($this->conexion);
+    }
+    $this->conexion->close();
+    return json_encode($this->data, JSON_PRETTY_PRINT);
+}
 }
 
 
