@@ -136,8 +136,27 @@ public function single($id){
     }
     return json_encode($this->data, JSON_PRETTY_PRINT);
 }
+
+public function singleByName($name){
+    $this->data = array();
+    if( isset($name) ) {
+        $sql = "SELECT * FROM productos WHERE nombre = '{$name}'";
+        if ( $result = $this->conexion->query($sql) ) {
+            $row = $result->fetch_assoc();
+            if(!is_null($row)) {
+                foreach($row as $key => $value) {
+                    $this->data[$key] = utf8_encode($value);
+                }
+            }
+            $result->free();
+        } else {
+            die('Query Error: '.mysqli_error($this->conexion));
+        }
+        $this->conexion->close();
+    }
+    return json_encode($this->data, JSON_PRETTY_PRINT);
 }
-    
+}
 
 
 ?>
