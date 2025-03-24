@@ -1,4 +1,5 @@
 <?php
+/*
     include_once __DIR__.'/database.php';
 
     // SE CREA EL ARREGLO QUE SE VA A DEVOLVER EN FORMA DE JSON
@@ -26,4 +27,21 @@
 
     // SE HACE LA CONVERSIÓN DE ARRAY A JSON
     echo json_encode($data, JSON_PRETTY_PRINT);
+*/
+
+use tec_Web\myapi\products as products;
+require_once __DIR__.'/myapi/products.php';
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Obtener los datos del POST
+    $jsonOBJ = json_decode(json_encode($_POST));
+
+    $proObj = new products('marketzone');
+    $response = $proObj->single($jsonOBJ->id);
+    echo $response;
+} else {
+    echo json_encode(array(
+        'status' => 'error',
+        'message' => 'Solicitud no válida'
+    ), JSON_PRETTY_PRINT);
+}
 ?>

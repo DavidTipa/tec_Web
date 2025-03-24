@@ -93,7 +93,51 @@ public function update($jsonOBJ){
     $this->conexion->close();
     return json_encode($this->data, JSON_PRETTY_PRINT);
 }
+
+public function search(){
+    $this->data = array();
+    if( isset($_GET['search']) ) {
+        $search = $_GET['search'];
+        $sql = "SELECT * FROM productos WHERE (id = '{$search}' OR nombre LIKE '%{$search}%' OR marca LIKE '%{$search}%' OR detalles LIKE '%{$search}%') AND eliminado = 0";
+        if ( $result = $this->conexion->query($sql) ) {
+            $rows = $result->fetch_all(MYSQLI_ASSOC);
+            if(!is_null($rows)) {
+                foreach($rows as $num => $row) {
+                    foreach($row as $key => $value) {
+                        $this->data[$num][$key] = utf8_encode($value);
+                    }
+                }
+            }
+            $result->free();
+        } else {
+            die('Query Error: '.mysqli_error($this->conexion));
+        }
+        $this->conexion->close();
+    } 
+    return json_encode($this->data, JSON_PRETTY_PRINT);
 }
+
+public function single($id){
+    $this->data = array();
+    if( isset($id) ) {
+        $sql = "SELECT * FROM productos WHERE id = {$id}";
+        if ( $result = $this->conexion->query($sql) ) {
+            $row = $result->fetch_assoc();
+            if(!is_null($row)) {
+                foreach($row as $key => $value) {
+                    $this->data[$key] = utf8_encode($value);
+                }
+            }
+            $result->free();
+        } else {
+            die('Query Error: '.mysqli_error($this->conexion));
+        }
+        $this->conexion->close();
+    }
+    return json_encode($this->data, JSON_PRETTY_PRINT);
+}
+}
+    
 
 
 ?>
