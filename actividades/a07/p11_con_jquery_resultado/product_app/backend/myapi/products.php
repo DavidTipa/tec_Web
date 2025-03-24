@@ -70,6 +70,7 @@ public function delete($id){
     );
     $sql = "UPDATE productos SET eliminado=1 WHERE id = {$id}";
     if ( $this->conexion->query($sql) ) {
+        
         $this->data['status'] =  "success";
         $this->data['message'] =  "Producto eliminado";
     } else {
@@ -137,15 +138,18 @@ public function single($id){
     return json_encode($this->data, JSON_PRETTY_PRINT);
 }
 
+
 public function singleByName($name){
     $this->data = array();
     if( isset($name) ) {
-        $sql = "SELECT * FROM productos WHERE nombre = '{$name}'";
+        $sql = "SELECT * FROM productos WHERE nombre LIKE '%{$name}%' AND eliminado = 0";
         if ( $result = $this->conexion->query($sql) ) {
-            $row = $result->fetch_assoc();
-            if(!is_null($row)) {
-                foreach($row as $key => $value) {
-                    $this->data[$key] = utf8_encode($value);
+            $rows = $result->fetch_all(MYSQLI_ASSOC);
+            if(!is_null($rows)) {
+                foreach($rows as $num => $row) {
+                    foreach($row as $key => $value) {
+                        $this->data[$num][$key] = utf8_encode($value);
+                    }
                 }
             }
             $result->free();
@@ -153,8 +157,9 @@ public function singleByName($name){
             die('Query Error: '.mysqli_error($this->conexion));
         }
         $this->conexion->close();
-    }
+    } 
     return json_encode($this->data, JSON_PRETTY_PRINT);
+    
 }
 }
 
