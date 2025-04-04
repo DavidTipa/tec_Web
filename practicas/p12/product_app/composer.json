@@ -2,6 +2,9 @@
     "autoload": {
         "psr-4": {
             "TECWEB\\MYAPI\\": "backend/"
-        }
+        },
+        "classmap": [
+            "backend/Database/DataBase.php"
+        ]
     }
 }
